@@ -1,7 +1,7 @@
 // Json-server local: http://localhost:3000
 // API real local:    http://localhost:3001
 // Na Parte 5 troca pelo URL da API no Render
-const API_URL = "http://localhost:3000";
+const API_URL = "https://api-alunos-9t5n.onrender.com";
 
 const tabela = document.getElementById("tabela");
 const form = document.getElementById("form-aluno");
