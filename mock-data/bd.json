@@ -1,0 +1,53 @@
+{
+  "alunos": [
+    {
+      "id": 1,
+      "nome": "Ana",
+      "apelido": "Silva",
+      "idCurso": 1,
+      "anoCurricular": 1
+    },
+    {
+      "id": 2,
+      "nome": "Bruno",
+      "apelido": "Costa",
+      "idCurso": 2,
+      "anoCurricular": 2
+    },
+    {
+      "id": 3,
+      "nome": "Carla",
+      "apelido": "Ferreira",
+      "idCurso": 1,
+      "anoCurricular": 3
+    },
+    {
+      "id": 4,
+      "nome": "Diogo",
+      "apelido": "Santos",
+      "idCurso": 3,
+      "anoCurricular": 1
+    },
+    {
+      "id": 5,
+      "nome": "Eva",
+      "apelido": "Pereira",
+      "idCurso": 2,
+      "anoCurricular": 3
+    }
+  ],
+  "cursos": [
+    {
+      "id": 1,
+      "nomeDoCurso": "Engenharia Informática"
+    },
+    {
+      "id": 2,
+      "nomeDoCurso": "Design Multimédia"
+    },
+    {
+      "id": 3,
+      "nomeDoCurso": "Gestão"
+    }
+  ]
+}

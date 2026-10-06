@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "f32c1940-aff5-45e3-a885-3a5c87b19407",
+    "name": "API Alunos (json-server)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54829284",
+    "_collection_link": "https://go.postman.co/collection/54829284-f32c1940-aff5-45e3-a885-3a5c87b19407?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET todos os alunos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('É array', () => pm.expect(pm.response.json()).to.be.an('array'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/alunos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET aluno por id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/alunos/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST criar aluno",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('201 Created', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('novoId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Teste\",\n  \"apelido\": \"Postman\",\n  \"idCurso\": 1,\n  \"anoCurricular\": 2\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/alunos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT atualizar aluno",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Teste\",\n  \"apelido\": \"Editado\",\n  \"idCurso\": 2,\n  \"anoCurricular\": 3\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/alunos/{{novoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos",
+            "{{novoId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE apagar aluno",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/alunos/{{novoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos",
+            "{{novoId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET todos os cursos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/cursos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "cursos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET curso por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/cursos/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "cursos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "novoId",
+      "value": ""
+    }
+  ]
+}
