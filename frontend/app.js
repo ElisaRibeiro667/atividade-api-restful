@@ -1,4 +1,6 @@
-// Na Parte 5, troca esta URL pela URL da API no Render
+// Json-server local: http://localhost:3000
+// API real local:    http://localhost:3001
+// Na Parte 5 troca pelo URL da API no Render
 const API_URL = "http://localhost:3000";
 
 const tabela = document.getElementById("tabela");
@@ -27,13 +29,13 @@ async function carregarAlunos() {
   try {
     const alunos = await pedido("/alunos");
     tabela.innerHTML = alunos.map(a => {
-      const curso = cursos.find(c => c.id === a.idCurso);
+      const curso = cursos.find(c => String(c.id) === String(a.idCurso));
       return `<tr>
         <td>${a.nome}</td><td>${a.apelido}</td>
         <td>${curso ? curso.nomeDoCurso : "-"}</td><td>${a.anoCurricular}</td>
         <td>
-          <button class="editar" onclick="editar(${a.id})">Editar</button>
-          <button class="apagar" onclick="apagar(${a.id})">Apagar</button>
+          <button class="editar" onclick="editar('${a.id}')">Editar</button>
+          <button class="apagar" onclick="apagar('${a.id}')">Apagar</button>
         </td></tr>`;
     }).join("");
     msg.textContent = "";
@@ -71,10 +73,12 @@ function limparForm() {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("id").value;
+  const valorCurso = selectCurso.value;
   const aluno = {
     nome: document.getElementById("nome").value,
     apelido: document.getElementById("apelido").value,
-    idCurso: Number(selectCurso.value),
+    // json-server usa ids numéricos; o MongoDB usa ids em texto
+    idCurso: /^\d+$/.test(valorCurso) ? Number(valorCurso) : valorCurso,
     anoCurricular: Number(document.getElementById("anoCurricular").value),
   };
   try {
@@ -91,6 +95,10 @@ form.addEventListener("submit", async (e) => {
 btnCancelar.addEventListener("click", limparForm);
 
 (async () => {
-  await carregarCursos();
-  await carregarAlunos();
+  try {
+    await carregarCursos();
+    await carregarAlunos();
+  } catch (e) {
+    msg.textContent = "Não foi possível ligar à API: " + e.message;
+  }
 })();
