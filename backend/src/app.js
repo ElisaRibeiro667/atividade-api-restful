@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("../docs/swagger");
 
 const app = express();
 
@@ -7,8 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (_req, res) => {
-  res.json({ mensagem: "API de Alunos a funcionar", rotas: ["/alunos", "/cursos"] });
+  res.json({ mensagem: "API de Alunos a funcionar", rotas: ["/alunos", "/cursos", "/api-docs"] });
 });
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/alunos", require("./routes/alunos"));
 app.use("/cursos", require("./routes/cursos"));
 
